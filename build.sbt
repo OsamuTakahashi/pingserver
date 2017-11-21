@@ -2,9 +2,11 @@ import sbt.Keys._
 
 val projectScalaVersion = "2.11.8"
 
+resolvers in Global += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+
 resolvers += "OSS Sonatype" at "https://repo1.maven.org/maven2/"
 
-val akkaVersion = "2.4.11"
+val akkaVersion = "2.5.6"
 
 val akkaLibraries = Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
@@ -15,7 +17,7 @@ val akkaLibraries = Seq(
   "com.google.protobuf" % "protobuf-java" % "2.4.1" % Runtime
 )
 
-val kamonVersion = "0.6.3"
+val kamonVersion = "0.6.7"
 
 val kamonLibraries = Seq(
   "io.kamon" %% "kamon-core" % kamonVersion,
@@ -24,8 +26,8 @@ val kamonLibraries = Seq(
   "io.kamon" %% "kamon-system-metrics" % kamonVersion,
   //"io.kamon" %% "kamon-jmx" % kamonVersion,
   //"io.kamon" %% "kamon-jdbc" % kamonVersion % Runtime,
-  "io.kamon" %% "kamon-akka" % kamonVersion % Runtime,
-  "io.kamon" %% "kamon-akka-remote" % kamonVersion % Runtime,
+  "io.kamon" %% "kamon-akka-2.5" % "0.6.8",
+  "io.kamon" %% "kamon-akka-remote-2.4" % kamonVersion,
   "io.kamon" %% "kamon-influxdb" % kamonVersion,
   //"io.kamon" %% "kamon-log-reporter" % kamonVersion,
   "org.aspectj" %  "aspectjweaver" % "1.8.1"
@@ -79,7 +81,7 @@ val testLibraries = Seq(
 resolvers += "RustyRaven" at "http://rustyraven.github.io"
 
 val codebookLibraries = Seq(
-  "com.rustyraven" %% "codebook-runtime" % "1.1"
+  "com.rusty-raven" %% "codebook-runtime" % "1.3.6-SNAPSHOT"
 )
 
 aspectjSettings
@@ -106,6 +108,6 @@ lazy val root = (project in file("."))
       //mysqlConnectorLibraries ++
       //jodaTimeLibraries ++
       loggingLibraries ++
-      testLibraries
-      //codebookLibraries
+      testLibraries ++
+      codebookLibraries
   )
